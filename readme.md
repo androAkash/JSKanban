@@ -1,17 +1,31 @@
-## Drag and Drop System (Phase 1)
+# Kanban Board (HTML, CSS, JavaScript)
 
-### 1. Hover Feedback
-When a task is dragged over a column, the column highlights using a `hover-over` CSS class.  
-This is handled through a reusable function `addDragEventsOnColumn()`, which attaches
-`dragenter` and `dragleave` events to each column.
+A simple Kanban board with draggable tasks built using vanilla JavaScript.
 
-### 2. Enabling Drop Behavior
-HTML5 drag-and-drop does not allow dropping by default.  
-Even if a `drop` event exists, it will not trigger unless we explicitly enable it.
+## Features
+- Three columns: Todo, In Progress, Done
+- Drag & drop tasks between columns
+- Hover effect on columns during drag
+- Clean and modular JavaScript structure
+- Easily extendable architecture
 
-To allow dropping, we use:
+## Tech Stack
+- HTML5 Drag & Drop API
+- CSS3
+- Vanilla JavaScript (ES6)
 
-```js
-column.addEventListener("dragover", (e) => {
-    e.preventDefault();
-});
+## Project Structure
+.
+├── index.html
+├── main.js
+└── styles.css
+
+## How to Run
+Just open `index.html` in your browser.
+
+## Roadmap
+- [ ] Add task creation modal
+- [ ] Persist tasks using LocalStorage
+- [ ] Add delete feature
+- [ ] Add edit task feature
+
