@@ -8,8 +8,8 @@
     --background-color: black;
     --background-btn-color: #1a1a1a;
     --primary-text-color: #f4f4f4;
-    --background-task-color:#2a2a2a;
-    --delete-color:#f90134;
+    --background-task-color: #2a2a2a;
+    --delete-color: #f90134;
 
     /* padding variables */
     --nav-padding: 1rem 2rem;
@@ -20,11 +20,11 @@
     --padding-xl: 25px;
 
     /* border-radius variables */
-     --border-radius-s: 5px;
-     --border-radius-m: 10px;
-     --border-radius-l: 15px;
-     --border-radius-xl: 20px;
-     --border-radius-xxl: 30px;
+    --border-radius-s: 5px;
+    --border-radius-m: 10px;
+    --border-radius-l: 15px;
+    --border-radius-xl: 20px;
+    --border-radius-xxl: 30px;
 
 }
 
@@ -42,11 +42,13 @@ body {
     background-color: var(--background-color);
     color: var(--primary-text-color);
 }
-main{
+
+main {
     height: 100%;
     display: flex;
     flex-direction: column;
 }
+
 nav {
     padding: var(--nav-padding);
     display: flex;
@@ -64,14 +66,15 @@ nav button {
     border-radius: var(--border-radius-m);
 }
 
-section{
+section {
     padding: var(--section-padding);
     display: flex;
     flex-grow: 1;
     justify-content: space-between;
     gap: var(--border-radius-xxl);
 }
-section .task-column{
+
+section .task-column {
     background-color: var(--background-btn-color);
     flex-grow: 1;
     padding: var(--padding-m);
@@ -81,17 +84,20 @@ section .task-column{
     border-radius: var(--border-radius-m);
     transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
 }
-section .task-column.hover-over{
+
+section .task-column.hover-over {
     border: 2px dashed var(--primary-text-color);
     scale: 1.02;
 }
-section .task-column .heading{
+
+section .task-column .heading {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-section .task-column .task{
+
+section .task-column .task {
     background-color: var(--background-task-color);
     padding: var(--padding-m);
     border-radius: var(--border-radius-m);
@@ -100,7 +106,8 @@ section .task-column .task{
     gap: var(--padding-s);
     cursor: grab;
 }
-section .task-column .task button{
+
+section .task-column .task button {
     align-self: flex-end;
     cursor: pointer;
     padding: var(--padding-s) var(--padding-m);
@@ -109,4 +116,59 @@ section .task-column .task button{
     border-radius: var(--border-radius-s);
     background-color: var(--delete-color);
     color: var(--primary-text-color);
+}
+
+.modal {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active{
+    display: flex;
+}
+
+.modal .center {
+    background-color: var(--background-btn-color);
+    padding: var(--padding-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-m);
+    border-radius: var(--border-radius-m);
+    z-index: 10;
+}
+
+.modal .bg{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(107, 104, 104, 0.329);
+    backdrop-filter: blur(2px);
+}
+
+.modal .center input,
+.modal .center textarea,
+.modal .center select {
+    background-color: var(--background-task-color);
+    color: var(--primary-text-color);
+    border: none;
+    outline: none;
+    padding: var(--padding-m);
+    border-radius: var(--border-radius-s);
+}
+.modal .center button{
+    background-color: var(--background-task-color);
+    border: none;
+    outline: none;
+    color: var(--primary-text-color);
+    cursor: pointer;
+    border-radius: var(--border-radius-m);
+    padding: var(--padding-m) var(--padding-l);
+    width: fit-content;
+    align-self: center;
 }
