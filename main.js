@@ -33,12 +33,12 @@ function addDragEventsOnColumn(column) {
         e.preventDefault();
         column.classList.remove("hover-over")
     })
-    column.addEventListener("dragover",(e)=>{
+    column.addEventListener("dragover", (e) => {
         e.preventDefault()
     })
-    column.addEventListener("drop",(e)=>{
+    column.addEventListener("drop", (e) => {
         e.preventDefault()
-        console.log("Dropped",dragElement,column);
+        console.log("Dropped", dragElement, column);
 
         column.appendChild(dragElement);
         column.classList.remove("hover-over")
@@ -52,12 +52,25 @@ addDragEventsOnColumn(done)
 const toggalModalButton = document.querySelector("#toggle-modal")
 const modalBg = document.querySelector("modal .bg")
 const modal = document.querySelector(".modal")
+const modalCenter = document.querySelector(".modal .center")
+const addTaskButton = document.querySelector("#add-new-task")
 
-toggalModalButton.addEventListener("click",()=>{
+toggalModalButton.addEventListener("click", () => {
     modal.classList.toggle("active")
 })
 
-modal.addEventListener("click",()=>{
-    modal.classList.remove("active") 
+modal.addEventListener("click", () => {
+    modal.classList.remove("active")
 })
+modalCenter.addEventListener("click", (e) => {
+    //Prevent closing the modal
+    e.stopPropagation()
+})
+
+addTaskButton.addEventListener("click", () => {
+    const taskTitle = document.querySelector("#task-title-input").value
+    const taskDesc = document.querySelector("#task-desc-input").value
+    modal.classList.remove("active")
+})
+
 /* Modal logic */
