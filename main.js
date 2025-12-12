@@ -42,6 +42,13 @@ function addDragEventsOnColumn(column) {
 
         column.appendChild(dragElement);
         column.classList.remove("hover-over")
+
+        [todo,progress,done].forEach(col=>{
+        const tasks = col.querySelectorAll(".task")
+        const count = col.querySelector(".right")
+        
+        count.innerText = tasks.length
+    })
     })
 }
 addDragEventsOnColumn(todo);
@@ -70,7 +77,24 @@ modalCenter.addEventListener("click", (e) => {
 addTaskButton.addEventListener("click", () => {
     const taskTitle = document.querySelector("#task-title-input").value
     const taskDesc = document.querySelector("#task-desc-input").value
+
+    const div = document.createElement("div")
+
+    div.classList.add("task")
+    div.setAttribute("draggable","true")
+    div.innerHTML = `
+                    <h2>${taskTitle}</h2>
+                    <p>${taskDesc}</p>
+                    <button>Delete</button>
+                    `
+    todo.appendChild(div)
+
+    div.addEventListener("drag",()=>{
+        dragElement = div
+    })
+
     modal.classList.remove("active")
 })
+
 
 /* Modal logic */
