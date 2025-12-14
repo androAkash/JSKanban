@@ -42,13 +42,8 @@ function addDragEventsOnColumn(column) {
 
         column.appendChild(dragElement);
         column.classList.remove("hover-over")
-
-        [todo,progress,done].forEach(col=>{
-        const tasks = col.querySelectorAll(".task")
-        const count = col.querySelector(".right")
         
-        count.innerText = tasks.length
-    })
+        updateCounts()
     })
 }
 addDragEventsOnColumn(todo);
@@ -81,7 +76,7 @@ addTaskButton.addEventListener("click", () => {
     const div = document.createElement("div")
 
     div.classList.add("task")
-    div.setAttribute("draggable","true")
+    div.setAttribute("draggable", "true")
     div.innerHTML = `
                     <h2>${taskTitle}</h2>
                     <p>${taskDesc}</p>
@@ -89,12 +84,23 @@ addTaskButton.addEventListener("click", () => {
                     `
     todo.appendChild(div)
 
-    div.addEventListener("drag",()=>{
+
+    div.addEventListener("dragstart", () => {
         dragElement = div
     })
+
+    updateCounts()
 
     modal.classList.remove("active")
 })
 
 
 /* Modal logic */
+
+function updateCounts() {
+    [todo, progress, done].forEach(col => {
+        const tasks = col.querySelectorAll(".task")
+        const count = col.querySelector(".right")
+        count.innerText = tasks.length
+    })
+}
