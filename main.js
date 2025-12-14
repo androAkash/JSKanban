@@ -1,8 +1,32 @@
+let taskData = {}
 const todo = document.querySelector('#todo')
 const progress = document.querySelector('#progress')
 const done = document.querySelector('#done')
 const task = document.querySelectorAll(".task")
 let dragElement = null
+
+if (localStorage.getItem("tasks")) {
+    const data = JSON.parse(localStorage.getItem("tasks"))
+
+    for (const col in data) {
+        const column = document.querySelector(`#${col}`)
+        data[col].forEach(task => {
+            const div = document.createElement("div")
+
+            div.classList.add("task")
+            div.setAttribute("draggable", "true")
+            div.innerHTML = `
+                    <h2>${task.taskTitle}</h2>
+                    <p>${task.taskDesc}</p>
+                    <button>Delete</button>
+                    `
+            column.appendChild(div)
+            div.addEventListener("drag", (e) => {
+                dragElement = div
+            })
+        })
+    }
+}
 
 task.forEach(task => {
     task.addEventListener("drag", (e) => {
@@ -42,7 +66,7 @@ function addDragEventsOnColumn(column) {
 
         column.appendChild(dragElement);
         column.classList.remove("hover-over")
-        
+
         updateCounts()
     })
 }
@@ -101,6 +125,14 @@ function updateCounts() {
     [todo, progress, done].forEach(col => {
         const tasks = col.querySelectorAll(".task")
         const count = col.querySelector(".right")
+
+        taskData[col.id] = Array.from(tasks).map(t => {
+            return {
+                taskTitle: t.querySelector("h2").innerText,
+                taskDesc: t.querySelector("p").innerText
+            }
+        })
+        localStorage.setItem("tasks", JSON.stringify(taskData))
         count.innerText = tasks.length
     })
 }
