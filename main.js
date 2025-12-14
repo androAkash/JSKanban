@@ -7,7 +7,7 @@ let dragElement = null
 
 function addTask(title, desc, column) {
     const div = document.createElement("div")
-
+    // Add Task using DOM
     div.classList.add("task")
     div.setAttribute("draggable", "true")
     div.innerHTML = `
@@ -19,7 +19,12 @@ function addTask(title, desc, column) {
     div.addEventListener("dragstart", (e) => {
         dragElement = div
     })
-    
+    // Delete Task using DOM
+    const deleteBtn = div.querySelector("button")
+    deleteBtn.addEventListener("click", (e) => {
+        div.remove()
+        updateCounts()
+    })
     return div
 }
 
@@ -108,6 +113,8 @@ addTaskButton.addEventListener("click", () => {
     updateCounts()
 
     modal.classList.remove("active")
+    document.querySelector("#task-title-input").value = ""
+    document.querySelector("#task-desc-input").value = ""
 })
 
 
