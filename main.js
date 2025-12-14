@@ -5,31 +5,38 @@ const done = document.querySelector('#done')
 const task = document.querySelectorAll(".task")
 let dragElement = null
 
+function addTask(title, desc, column) {
+    const div = document.createElement("div")
+
+    div.classList.add("task")
+    div.setAttribute("draggable", "true")
+    div.innerHTML = `
+                    <h2>${title}</h2>
+                    <p>${desc}</p>
+                    <button>Delete</button>
+                    `
+    column.appendChild(div)
+    div.addEventListener("dragstart", (e) => {
+        dragElement = div
+    })
+    
+    return div
+}
+
 if (localStorage.getItem("tasks")) {
     const data = JSON.parse(localStorage.getItem("tasks"))
 
     for (const col in data) {
         const column = document.querySelector(`#${col}`)
         data[col].forEach(task => {
-            const div = document.createElement("div")
-
-            div.classList.add("task")
-            div.setAttribute("draggable", "true")
-            div.innerHTML = `
-                    <h2>${task.taskTitle}</h2>
-                    <p>${task.taskDesc}</p>
-                    <button>Delete</button>
-                    `
-            column.appendChild(div)
-            div.addEventListener("drag", (e) => {
-                dragElement = div
-            })
+            addTask(task.taskTitle, task.taskDesc, column)
         })
     }
+    updateCounts()
 }
 
 task.forEach(task => {
-    task.addEventListener("drag", (e) => {
+    task.addEventListener("dragstart", (e) => {
         dragElement = task
     })
 })
@@ -97,22 +104,7 @@ addTaskButton.addEventListener("click", () => {
     const taskTitle = document.querySelector("#task-title-input").value
     const taskDesc = document.querySelector("#task-desc-input").value
 
-    const div = document.createElement("div")
-
-    div.classList.add("task")
-    div.setAttribute("draggable", "true")
-    div.innerHTML = `
-                    <h2>${taskTitle}</h2>
-                    <p>${taskDesc}</p>
-                    <button>Delete</button>
-                    `
-    todo.appendChild(div)
-
-
-    div.addEventListener("dragstart", () => {
-        dragElement = div
-    })
-
+    addTask(taskTitle, taskDesc, todo)
     updateCounts()
 
     modal.classList.remove("active")
