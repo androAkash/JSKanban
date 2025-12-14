@@ -24,8 +24,23 @@ A simple Kanban board with draggable tasks built using vanilla JavaScript.
 Just open `index.html` in your browser.
 
 ## Roadmap
-- [ ] Add task creation modal
-- [ ] Persist tasks using LocalStorage
-- [ ] Add delete feature
-- [ ] Add edit task feature
+### ✅ Completed
+- [x] Task creation modal
+- [x] Drag & drop between columns
+- [x] Column task count
+- [x] Persist tasks using LocalStorage
+- [x] Delete task functionality
 
+### 🔜 Remaining
+- [ ] Theme switcher (Light / Dark)
+- [ ] Edit task feature
+- [ ] Prevent adding empty tasks from modal
+
+## 📌 Future Enhancements
+- Animations during drag & drop
+- Due dates and priority labels
+
+## 📄 License
+
+- Free to use and modify for
+- learning or personal projects.
